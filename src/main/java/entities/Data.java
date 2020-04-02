@@ -2,43 +2,62 @@ package entities;
 
 public class Data {
 
-    private String datetime;
-    private String data_available;
-    private Indexes indexes;
+    private String city;
+    private String state;
+    private String country;
+    private Location location;
+    private Current current;
 
-    public Data() {
+    public Data() { }
+
+    public String getCity() {
+        return city;
     }
 
-    public String getDatetime() {
-        return datetime;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
+    public String getState() {
+        return state;
     }
 
-    public String getData_available() {
-        return data_available;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public void setData_available(String data_available) {
-        this.data_available = data_available;
+    public String getCountry() {
+        return country;
     }
 
-    public Indexes getIndexes() {
-        return indexes;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public void setIndexes(Indexes indexes) {
-        this.indexes = indexes;
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Current getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Current current) {
+        this.current = current;
     }
 
     @Override
     public String toString() {
         return "Data{" +
-                "datetime='" + datetime + '\'' +
-                ", data_available='" + data_available + '\'' +
-                ", indexes='" + indexes + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                ", location=" + location +
+                ", current=" + current +
                 '}';
     }
 }

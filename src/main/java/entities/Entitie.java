@@ -5,18 +5,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Entitie {
 
-    private String metadata;
+    private String status;
     private Data data;
 
-    public Entitie() {
+    public String getStatus() {
+        return status;
     }
 
-    public String getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(String metadata) {
-        this.metadata = metadata;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Data getData() {
@@ -30,8 +27,8 @@ public class Entitie {
     @Override
     public String toString() {
         return "Entitie{" +
-                "metadata='" + metadata + '\'' +
-                ", data='" + data + '\'' +
+                "status=" + status +
+                ", data=" + data +
                 '}';
     }
 }
