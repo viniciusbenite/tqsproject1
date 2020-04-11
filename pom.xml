@@ -38,13 +38,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.google.common/google-collect -->
-        <dependency>
-            <groupId>com.google.common</groupId>
-            <artifactId>google-collect</artifactId>
-            <version>0.5</version>
-        </dependency>
-
 
     </dependencies>
 

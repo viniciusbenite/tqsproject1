@@ -15,10 +15,18 @@ import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 public class AppController {
 
     private static final Logger log = LoggerFactory.getLogger(ConsumingRestApplication.class);
+
+    private final List<String> data = new ArrayList<>();
+    private final Map<String, List<String>> myMap = new HashMap<>();
 
     MemoryCache<Entitie> memCache = new MemoryCache<>();
 
@@ -52,8 +60,8 @@ public class AppController {
             assert airQuality != null;
             log.info(airQuality.getStatus());
             form.setEntitie(airQuality);
-//            log.info(airQuality.getData().getCurrent().getWeather().toString());
             memCache.put(airQuality.getData().getCity(), airQuality);
+            saveData(airQuality);
             log.info("DATA FETCHED FROM API");
             return "result";
         }
@@ -62,5 +70,11 @@ public class AppController {
             log.error((e.getResponseBodyAsString()));
         }
         return "fail";
+    }
+
+    public void saveData(Entitie et) {
+        data.add(et.getData().getCurrent().getPollution().toString());
+        data.add(et.getData().getCurrent().getWeather().toString());
+        myMap.put(et.getData().getCity(), data);
     }
 }

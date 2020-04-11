@@ -2,12 +2,17 @@ package form;
 
 import entities.Entitie;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Form {
 
     private String country;
     private String state;
     private String city;
     private Entitie entitie;
+
+
 
     public String getCountry() {
         return country;
@@ -33,11 +38,7 @@ public class Form {
         this.city = city;
     }
 
-    public Entitie getEntitie() {
-        return entitie;
-    }
+    public Entitie getEntitie() { return entitie; }
 
-    public void setEntitie(Entitie entitie) {
-        this.entitie = entitie;
-    }
+    public void setEntitie(Entitie entitie) { this.entitie = entitie; }
 }
