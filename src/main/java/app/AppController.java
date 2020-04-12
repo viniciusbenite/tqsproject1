@@ -42,11 +42,19 @@ public class AppController {
     }
 
     @PostMapping("/")
-    public String greetingSubmit(@ModelAttribute Form form, RestTemplate rt) {
+    public String getAirQuality(@ModelAttribute Form form, RestTemplate rt) {
         try {
             Entitie e = memCache.get(form.getCity(), Entitie.class);
             if (e != null) {
                 form.setEntitie(e);
+                form.setData(e.getData());
+                form.setTemperature(e.getData().getCurrent().getWeather().getTp());
+                form.setPressure(e.getData().getCurrent().getWeather().getPr());
+                form.setHumidity(e.getData().getCurrent().getWeather().getHu());
+                form.setAqius(e.getData().getCurrent().getPollution().getAqius());
+                form.setMainus(e.getData().getCurrent().getPollution().getMainus());
+                form.setAqicn(e.getData().getCurrent().getPollution().getAqicn());
+                form.setMaincn(e.getData().getCurrent().getPollution().getMaincn());
                 log.info("DATA FETCHED FROM CACHE");
                 log.info("Expire time: " + memCache.getExpire());
                 return "result";
@@ -60,6 +68,14 @@ public class AppController {
             assert airQuality != null;
             log.info(airQuality.getStatus());
             form.setEntitie(airQuality);
+            form.setData(airQuality.getData());
+            form.setTemperature(airQuality.getData().getCurrent().getWeather().getTp());
+            form.setPressure(airQuality.getData().getCurrent().getWeather().getPr());
+            form.setHumidity(airQuality.getData().getCurrent().getWeather().getHu());
+            form.setAqius(airQuality.getData().getCurrent().getPollution().getAqius());
+            form.setMainus(airQuality.getData().getCurrent().getPollution().getMainus());
+            form.setAqicn(airQuality.getData().getCurrent().getPollution().getAqicn());
+            form.setMaincn(airQuality.getData().getCurrent().getPollution().getMaincn());
             memCache.put(airQuality.getData().getCity(), airQuality);
             saveData(airQuality);
             log.info("DATA FETCHED FROM API");
