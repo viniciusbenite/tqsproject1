@@ -7,10 +7,10 @@
 <body>
 <h1>Please, enter the location to get air quality data:</h1>
 <form action="#" th:action="@{/}" th:object="${form}" method="post">
-    <p>Country: <input type="text" th:field="*{country}" /></p>
-    <p>State: <input type="text" th:field="*{state}" /></p>
-    <p>City: <input type="text" th:field="*{city}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    <p>Country: <input type="text" th:field="*{country}" id="country"/></p>
+    <p>State: <input type="text" th:field="*{state}" id="state"/></p>
+    <p>City: <input type="text" th:field="*{city}" id="city"/></p>
+    <p><input type="submit" value="Submit" id="submit"/> <input type="reset" value="Reset" /></p>
 </form>
 </body>
 </html>

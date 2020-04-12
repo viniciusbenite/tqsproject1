@@ -16,7 +16,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
 @SpringBootTest(classes = ConsumingRestApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AppTest {
+public class UnitTests {
 
     @Autowired
     private AppController controller;
@@ -27,6 +27,7 @@ public class AppTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    // Integration tests
     @Test
     public void greetingShouldReturnDefaultMessage() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",

@@ -6,17 +6,17 @@
 </head>
 <body>
 <h1>Air Quality Data</h1>
-<p th:text="'Data: ' + ${form.entitie}" />
-<p th:text="'Country: ' + ${form.country}" />
-<p th:text="'State: ' + ${form.state}" />
-<p th:text="'City: ' + ${form.city}" />
-<p th:text="'Temperature: ' + ${form.temperature}" />
-<p th:text="'Pressure: ' + ${form.pressure}" />
-<p th:text="'Air humidity: ' + ${form.humidity}" />
-<p th:text="'Air quality US standart: ' + ${form.aqius}" />
+<p th:text="'Data: ' + ${form.entitie}" id="entitie"/>
+<p th:text="'Country: ' + ${form.country}" id="country"/>
+<p th:text="'State: ' + ${form.state}" id="state"/>
+<p th:text="'City: ' + ${form.city}" id="city"/>
+<p th:text="'Temperature: ' + ${form.temperature}" id="temperature"/>
+<p th:text="'Pressure: ' + ${form.pressure}" id="pressure"/>
+<p th:text="'Air humidity: ' + ${form.humidity}" id="humidity"/>
+<p th:text="'Air quality US standart: ' + ${form.aqius}" id="aqius"/>
 <p th:text="'Main polluent US standart: ' + ${form.mainus}" />
 <p th:text="'Air quality China standart: ' + ${form.aqicn}" />
 <p th:text="'Main polluent China standart: ' + ${form.maincn}" />
-<a href="/">Search for another city</a>
+<a href="/" >Search for another city</a>
 </body>
 </html>
