@@ -1,9 +1,6 @@
 package cache;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -69,6 +66,14 @@ public class MemoryCache<Object> {
                 return null;
             }
         return Optional.ofNullable(this.objects.get(name)).orElse(null);
+    }
+
+    public Set<String> getAll() {
+        return this.objects.keySet();
+    }
+
+    public void delete(final String name, final Object object) {
+        this.objects.remove(name, object);
     }
 
     @SuppressWarnings("unchecked")

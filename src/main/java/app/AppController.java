@@ -4,6 +4,9 @@ import entities.Entitie;
 import form.Form;
 import cache.MemoryCache;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -15,18 +18,11 @@ import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Controller
+@Api(value = "TQS Project Rest API")
 public class AppController {
 
     private static final Logger log = LoggerFactory.getLogger(ConsumingRestApplication.class);
-
-    private final List<String> data = new ArrayList<>();
-    private final Map<String, List<String>> myMap = new HashMap<>();
 
     MemoryCache<Entitie> memCache = new MemoryCache<>();
 
@@ -35,12 +31,14 @@ public class AppController {
         return builder.build();
     }
 
+    @ApiOperation(value = "Welcome page, form")
     @GetMapping("/")
     public String form(Model model) {
         model.addAttribute("form", new Form());
         return "form";
     }
 
+    @ApiOperation(value = "Get weather and pollution data based on country, state and city")
     @PostMapping("/")
     public String getAirQuality(@ModelAttribute Form form, RestTemplate rt) {
         try {
@@ -77,7 +75,6 @@ public class AppController {
             form.setAqicn(airQuality.getData().getCurrent().getPollution().getAqicn());
             form.setMaincn(airQuality.getData().getCurrent().getPollution().getMaincn());
             memCache.put(airQuality.getData().getCity(), airQuality);
-            saveData(airQuality);
             log.info("DATA FETCHED FROM API");
             return "result";
         }
@@ -88,9 +85,21 @@ public class AppController {
         return "fail";
     }
 
-    public void saveData(Entitie et) {
-        data.add(et.getData().getCurrent().getPollution().toString());
-        data.add(et.getData().getCurrent().getWeather().toString());
-        myMap.put(et.getData().getCity(), data);
+    @ApiOperation(value = "Delete data from the memory cache, based on city")
+    @DeleteMapping("/del/{city}/")
+    public String deleteDataFromMemCache(@PathVariable("city") String city,
+                                         @ModelAttribute Form form) {
+        try {
+            Entitie et = memCache.get(form.getCity(), Entitie.class);
+            if (et != null) {
+                memCache.delete(city, et);
+                log.info("City " + et.getData().getCity() + " deleted from cache");
+                return "delete_confirmation";
+            }
+        } catch (final HttpClientErrorException e) {
+            log.error(String.valueOf(e.getStatusCode()));
+            log.error((e.getResponseBodyAsString()));
+        }
+        return "fail";
     }
 }

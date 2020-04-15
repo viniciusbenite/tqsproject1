@@ -39,6 +39,7 @@ public class UnitTests {
         assertThat(controller).isNotNull();
     }
 
+    // Unit tests
     @Test
     public void memChacheInitiationNull() throws Exception {
         // given
